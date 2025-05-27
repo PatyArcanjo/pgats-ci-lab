@@ -1,0 +1,17 @@
+stages:
+  - testManual
+
+e2e-tests:
+  stage: testManual
+  image: node:22
+  tags:
+    - shell # ou runner tag que você estiver usando
+  script:
+    - apt-get update && apt-get install -y curl
+    - npm install -g yarn
+    - yarn
+    - yarn playwright install
+    - yarn run e2e
+  only:
+    - triggers
+  when: manual
