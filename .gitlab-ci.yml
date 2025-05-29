@@ -4,8 +4,8 @@ stages:
 e2e-tests:
   stage: testManual
   image: node:22
-  tags:
-    - shell # ou runner tag que você estiver usando
+  # tags:
+  #   - shell # ou runner tag que você estiver usando
   script:
     - apt-get update && apt-get install -y curl
     - npm install -g yarn
