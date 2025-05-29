@@ -13,5 +13,4 @@ e2e-tests:
     - yarn playwright install
     - yarn run e2e
   only:
-    - triggers
   when: manual
