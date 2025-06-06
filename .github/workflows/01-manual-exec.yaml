@@ -15,7 +15,8 @@ jobs:
   e2e-tests:
 
     #maquina que o job irá executar
-    runs-on: ubuntu-latest
+   #runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     #passos do scritp de build
     steps:
