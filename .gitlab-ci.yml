@@ -3,13 +3,11 @@ stages:
 
 e2e-tests:
   stage: testManual
-  image: node:22
+  image: mcr.microsoft.com/playwright:v1.42.1-jammy
   # tags:
   #   - shell # ou runner tag que você estiver usando
   script:
-    - apt-get update && apt-get install -y curl
-    - npm install -g yarn
-    - yarn
+    - yarn install
     - yarn playwright install
     - yarn run e2e
   only:
