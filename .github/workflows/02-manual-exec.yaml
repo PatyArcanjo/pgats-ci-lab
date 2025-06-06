@@ -1,7 +1,7 @@
-# CI de Nível 01 - Disparo Manual a partir de um clique
+# CI de Nível 02 - Disparo Manual a partir de um clique
 
 # nome do nosso 'pipeline' 
-name: 'Execução Manual'
+name: 'Execução Manual SelfHosted'
 
 # regras de disparo (gatilhos) ou tiggers 
 # gatilho de execução manual  =  workflow_dispatch
@@ -15,7 +15,7 @@ jobs:
   e2e-tests:
 
     #maquina que o job irá executar
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     #passos do scritp de build
     steps:
