@@ -30,7 +30,7 @@ jobs:
 
       #Checando padronizacao do código
       - name: Instalando dependências
-        run: yarn  linit
+        run: yarn lint
 
   unidade:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
   e2e-test:
     runs-on: ubuntu-latest
     steps:
-     #Instalação do Playwright
+      #Instalação do Playwright
       - name: Instalando Playwright
         run: yarn playwright install
 
