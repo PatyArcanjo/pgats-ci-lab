@@ -54,7 +54,7 @@ jobs:
       - name: Executando Testes
         run: yarn run e2e
 
-      - uses: actions/upload-artfact@v4
+      - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}  # ira gerar o relatório para todas as pipes que nao fora canceladas
         with:
           name: relatorio
