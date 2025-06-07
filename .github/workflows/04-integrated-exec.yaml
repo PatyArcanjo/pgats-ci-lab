@@ -1,7 +1,7 @@
 # CI de Nível 03 - Disparo após aconclusão de um pipeline
 
 # nome do nosso 'pipeline' 
-name: 'Execução por Deploy'
+name: 'Execução Integrada'
 
 # regras de disparo (gatilhos) ou tiggers 
 # gatilho de execução manual  =  workflow_dispatch
@@ -9,34 +9,16 @@ name: 'Execução por Deploy'
 # gatilho de execução a partir de outro pipe  =  workflow_run
 
 on:
-  workflow_run:
-    workflows: ['Execução Manual']  #nome da pipeline que irá monitorar
-    types: # somente para quando a pipeline estiver com o status completed 
-      - completed
-
-# trabalhos/tarefas que serão executadas dentro do pipeline = jobs
+  workflow_dispatch:
 
 jobs:
-  e2e-tests:
-
-    #maquina que o job irá executar
+  inspecao:
     runs-on: ubuntu-latest
 
-    # condicional - if
-    # '${ expressao }'
-    # == comparacao
-    
-    if: ${{ github.event.workflow_run.conclusion ==  'success' }}
-
-    #passos do scritp de build
     steps:
+
       # clone do projeto
       - uses: actions/checkout@v4
-
-      #instalacao do node
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
 
       #instalaçao do yarn
       - name: Instalando Yarn
@@ -46,11 +28,37 @@ jobs:
       - name: Instalando dependências
         run: yarn 
 
-      #Instalação do Playwright
+      #Checando padronizacao do código
+      - name: Instalando dependências
+        run: yarn  linit
+
+  unidade:
+    runs-on: ubuntu-latest
+
+    steps:
+      # clone do projeto
+       - uses: actions/setup-node@v4
+       
+       #instalaçao do yarm
+       - name: Instalando Yarn
+         run: npm install -g yarn
+
+      #instalaçao dependencias do yarn
+        - name: Instalando dependências
+          run: yarn 
+
+      #Executar o teste e2e
+        - name: Executando Unidade
+          run: yarn test
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+     #Instalação do Playwright
       - name: Instalando Playwright
         run: yarn playwright install
-      
-      #Executar o teste e2e
+
+     #Executar o teste e2e
       - name: Executando Testes
         run: yarn run e2e
 
@@ -59,4 +67,11 @@ jobs:
         if: ${{ !cancelled() }}  # ira gerar o relatório para todas as pipes que nao fora canceladas
         with:
           name: relatorio
-          path: ./playwright-report
+          path: ./playwright-report  
+
+deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Simulação do Deploy
+        run: echo "simulando o deploy com sucesso"
