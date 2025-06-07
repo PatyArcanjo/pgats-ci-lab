@@ -55,7 +55,7 @@ jobs:
         run: yarn run e2e
 
       - uses: actions/upload-artfact@v4
-        if: ${{ !canceled() }}  # ira gerar o relatório para todas as pipes que nao fora canceladas
+        if: ${{ !cancelled() }}  # ira gerar o relatório para todas as pipes que nao fora canceladas
         with:
           name: relatorio
           path: ./playwright-report
