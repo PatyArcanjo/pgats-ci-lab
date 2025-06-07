@@ -53,10 +53,15 @@ jobs:
 
   e2e-test:
     runs-on: ubuntu-latest
+
     steps:
       #Instalação do Playwright
       - name: Instalando Playwright
         run: yarn playwright install
+
+      #instalaçao dependencias do yarn
+      - name: Instalando dependências
+        run: yarn 
 
      #Executar o teste e2e
       - name: Executando Testes
