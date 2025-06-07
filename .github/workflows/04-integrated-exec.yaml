@@ -55,15 +55,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #Instalação do Playwright
-      - name: Instalando Playwright
-        run: yarn playwright install
+       #instalaçao do yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
       #instalaçao dependencias do yarn
       - name: Instalando dependências
         run: yarn 
 
-     #Executar o teste e2e
+      #Instalação do Playwright
+      - name: Instalando Playwright
+        run: yarn playwright install
+      
+      #Executar o teste e2e
       - name: Executando Testes
         run: yarn run e2e
 
