@@ -1,9 +1,9 @@
 # CI de Nível 03 - Disparo após aconclusão de um pipeline
 
-# nome do nosso 'pipeline' 
+# nome do nosso 'pipeline'
 name: 'Execução Integrada'
 
-# regras de disparo (gatilhos) ou tiggers 
+# regras de disparo (gatilhos) ou tiggers
 # gatilho de execução manual  =  workflow_dispatch
 # gatilho de execução agendade  =  scheldule
 # gatilho de execução a partir de outro pipe  =  workflow_run
@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       # clone do projeto
       - uses: actions/checkout@v4
 
@@ -26,7 +25,7 @@ jobs:
 
       #instalaçao dependencias do yarn
       - name: Instalando dependências
-        run: yarn 
+        run: yarn
 
       #Checando padronizacao do código
       - name: Instalando dependências
@@ -38,14 +37,14 @@ jobs:
     steps:
       # clone do projeto
       - uses: actions/checkout@v4
-       
-       #instalaçao do yarm - 
+
+        #instalaçao do yarm -
       - name: Instalando Yarn
         run: npm install -g yarn
 
       #instalaçao dependencias do yarn
       - name: Instalando dependências
-        run: yarn 
+        run: yarn
 
       #Executar o teste e2e
       - name: Executando Unidade
@@ -55,27 +54,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     # clone do projeto
+      # clone do projeto
       - uses: actions/checkout@v4
 
       #instalaçao dependencias do yarn
       - name: Instalando dependências
-        run: yarn 
+        run: yarn
 
       #Instalação do Playwright
       - name: Instalando Playwright
         run: yarn playwright install
-      
+
       #Executar o teste e2e
       - name: Executando Testes
         run: yarn run e2e
 
       - uses: actions/upload-artifact@v4
-      
-        if: ${{ !cancelled() }}  # ira gerar o relatório para todas as pipes que nao fora canceladas
+
+        if: ${{ !cancelled() }} # ira gerar o relatório para todas as pipes que nao fora canceladas
         with:
           name: relatorio
-          path: ./playwright-report  
+          path: ./playwright-report
 
   deploy:
     runs-on: ubuntu-latest

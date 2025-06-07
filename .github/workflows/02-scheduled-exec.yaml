@@ -1,9 +1,9 @@
 # CI de Nível 02 - Disparo Agendada a partir de um clique
 
-# nome do nosso 'pipeline' 
+# nome do nosso 'pipeline'
 name: 'Execução Agendada'
 
-# regras de disparo (gatilhos) ou tiggers 
+# regras de disparo (gatilhos) ou tiggers
 # gatilho de execução manual  =  workflow_dispatch
 
 on:
@@ -14,7 +14,6 @@ on:
 
 jobs:
   e2e-tests:
-
     #maquina que o job irá executar
     runs-on: ubuntu-latest
 
@@ -34,12 +33,12 @@ jobs:
 
       #instalaçao dependencias do yarn
       - name: Instalando dependências
-        run: yarn 
+        run: yarn
 
       #Instalação do Playwright
       - name: Instalando Playwright
         run: yarn playwright install
-      
+
       #Executar o teste e2e
       - name: Executando Testes
         run: yarn run e2e
